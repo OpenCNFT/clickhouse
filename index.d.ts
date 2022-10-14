@@ -1,9 +1,9 @@
 /// <reference types="node" />
 
-declare module 'clickhouse' {
-  import {Stream} from 'stream';
+declare module "clickhouse" {
+  import { Stream } from "stream";
 
-  type callbackExec = (error: Error, rows?: Object[]) => void;
+  type callbackExec<T> = (error: Error, rows?: T[]) => void;
 
   export class ClickHouse {
     constructor(opts: Object);
@@ -18,8 +18,8 @@ declare module 'clickhouse' {
   }
 
   class QueryCursor {
-    toPromise(): Promise<Object[]>;
-    exec(callback: callbackExec): void;
+    toPromise<T = any>(): Promise<T[]>;
+    exec<T>(callback: callbackExec<T>): void;
     stream(): Stream & WriteStream;
   }
 }
